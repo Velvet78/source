@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: Rubble
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# Rubble_enable (bool): Set to NO by default. Set this variable to YES if you want to enable Rubble service.
+# Rubble_config (path): Set to /usr/local/etc/Rubble.conf by default.
+# Rubble_user:  The user account Rubble daemon runs as. It uses 'root' user by default.
+# Rubble_group: The group account Rubble daemon runs as. It uses 'wheel' group by default.
+# Rubble_datadir (str): Default to "/var/db/Rubble". Base data directory.
+
+. /etc/rc.subr
+
+name=Rubble
+rcvar=Rubble_enable
+
+: ${Rubble_enable:=NO}
+: ${Rubble_config=/usr/local/etc/Rubble.conf}
+: ${Rubble_datadir=/var/db/Rubble}
+: ${Rubble_user="root"}
+: ${Rubble_group="wheel"}
+
+required_files=${Rubble_config}
+command=/usr/local/bin/Rubbled
+Rubble_chdir=${Rubble_datadir}
+pidfile="${Rubble_datadir}/Rubbled.pid"
+stop_cmd=Rubble_stop
+command_args="-conf=${Rubble_config} -datadir=${Rubble_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+Rubble_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${Rubble_datadir}
+	[ $? -eq 0 ] && chown -R ${Rubble_user}:${Rubble_group} ${Rubble_datadir}
+}
+
+Rubble_prestart()
+{
+	if [ ! -d "${Rubble_datadir}/." ]; then
+		Rubble_create_datadir || return 1
+	fi
+}
+
+Rubble_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+Rubble_stop()
+{
+    Rubble_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${Rubble_config} -datadir=${Rubble_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"

@@ -1,0 +1,5 @@
+Rubble-qt usr/bin
+share/pixmaps/Rubble32.xpm usr/share/pixmaps
+share/pixmaps/Rubble80.xpm usr/share/pixmaps
+debian/Rubble-qt.desktop usr/share/applications
+debian/Rubble-qt.protocol usr/share/kde4/services/

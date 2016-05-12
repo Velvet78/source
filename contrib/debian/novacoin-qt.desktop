@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Rubble
+Comment=Rubble P2P Cryptocurrency
+Comment[ru]=Rubble, P2P криптовалюта
+Comment[fr]=Rubble, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Rubble, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/Rubble-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/Rubble80.xpm
+MimeType=x-scheme-handler/Rubble;
+Categories=Office;

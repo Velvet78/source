@@ -1,0 +1,11 @@
+[Unit]
+Description=Rubble daemon serivce
+After=network.target
+
+[Service]
+Type=simple
+User=Rubble
+ExecStart=/opt/Rubble/Rubbled
+
+[Install]
+WantedBy=multi-user.target

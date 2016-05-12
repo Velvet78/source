@@ -1,0 +1,2 @@
+debian/bin/Rubbled usr/bin
+src/Rubbled usr/lib/Rubble
