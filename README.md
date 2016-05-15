@@ -1,16 +1,18 @@
 
 Rubble official development tree
 
-Rubble - a hybrid scrypt PoW + PoS based cryptocurrency.
+Rubble - a hybrid Scrypt PoW + PoS based cryptocurrency.
+Rubble is an experimental cryptocurrency.
 
-* 10 minutes stake spacing
-* 30 minutes PoW spacing
-* Balanced PoW blocks and stakes weighting
-* The PoW subsidy halves every x64 multiply of PoW difficulty
-* The PoS interest halves every x64 multiply of PoS difficulty
-* Maximum PoW reward is 100 coins
-* Maximum PoS reward is 10 coins
-* No deterministic limit of the supply, currently ~ 1282144 coins mined
+Initial Coin Supply: 10,000,000 (premined)
+Target block time: 300 seconds (5 minutes)
+Stake Interest: 50% annually
+Minimum stake time: 1 hour
+Maximum stake time: 90 days
+Diff. adjustment per block
+Distribution through various processes
+PoW is active until block 16,000 but with zero reward
+Past block 16,000 this is Proof-of-Stake only
 
 Development process
 ===========================
